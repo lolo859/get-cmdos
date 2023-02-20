@@ -6,6 +6,7 @@ import urllib.request
 import zipfile
 import shutil
 import sys
+import requests as req
 
 language=input("Choisissez un langage / Chose your language : fr / en : ")
 if language=="fr":
@@ -25,9 +26,13 @@ if language=="fr":
                 print("Déplacement du fichier "+file+" depuis "+path+"/CmdOS-main/"+file+" vers "+path)
                 shutil.move(path+"/CmdOS-main/"+file,path)
             os.rmdir(path+"/CmdOS-main")
-            print("Finition...")
+            print("Finalisation...")
             os.remove(path+"/user/readme.txt")
-            print("CmdOS a bien été installé dans le répertoire "+path)
+            versiontxt=open(path+"/cmdversion.txt","r")
+            version=versiontxt.readlines()
+            version=version[0]
+            versiontxt.close()
+            print("CmdOS v"+version+" a bien été installé dans le répertoire "+path)
         else:
             print("Une erreur s'est produite, veuiller vérifier que le répertoire existe et qu'il est vide.")
     elif chose=="d":
@@ -56,6 +61,11 @@ if language=="fr":
             for file in list_file:
                 print("Déplacement du dossier "+file+" depuis "+path+"/user/"+file+" vers "+path+"/save")
                 shutil.move(path+"/user/"+file,path+"/save")
+            versiontxt=open(path+"/cmdversion.txt","r")
+            version=versiontxt.readlines()
+            version=version[0]
+            versiontxt.close()
+            print("La version actelle est "+version)
             print("Désinstallation de l'ancienne version...")
             list_file=os.listdir(path)
             for file in list_file:
@@ -68,6 +78,13 @@ if language=="fr":
                         shutil.rmtree(path+"/"+file)
                 else:
                     next
+            versiontxt=req.get("https://biotech-online.pagesperso-orange.fr/Mathias/cmdversion",allow_redirects=True)
+            open("cmdversion.txt","wb").write(versiontxt.content)
+            vertxt=open("cmdversion.txt","r")
+            verlist=vertxt.readlines()
+            vertxt.close()
+            print("La dernière version est "+verlist[0])
+            os.remove("cmdversion.txt")
             print("Installation de la nouvelle version...")
             print("Récupération des fichiers...")
             filename, headers = urllib.request.urlretrieve("https://github.com/lolo859/CmdOS/archive/refs/heads/main.zip", filename=path+"/CmdOS.zip")
@@ -85,10 +102,10 @@ if language=="fr":
             for file in list_file:
                 print("Restauration du compte utilisateur "+file+" depuis "+path+"/save/"+file+" vers "+path+"/user")
                 shutil.move(path+"/save/"+file,path+"/user")
-            print("Finition...")
+            print("Finalisation...")
             os.remove(path+"/user/readme.txt")
             shutil.rmtree(path+"/save")
-            print("CmdOS a bien été mis à jour dans le répertoire "+path)
+            print("CmdOS a bien été mis à jour dans le répertoire "+path+" vers la version "+verlist[0])
         else:
             print("Une erreur s'est produite, veuiller vérifier que le répertoire existe et que CmdOS y est installé.")
 elif language=="en":
@@ -110,11 +127,15 @@ elif language=="en":
             os.rmdir(path+"/CmdOS-main")
             print("Finishing...")
             os.remove(path+"/user/readme.txt")
-            print("CmdOS has been successfully installed in the directory "+path)
+            versiontxt=open(path+"/cmdversion.txt","r")
+            version=versiontxt.readlines()
+            version=version[0]
+            versiontxt.close()
+            print("CmdOS v"+version+" has been intalled in the directory "+path)
         else:
             print("An error has occurred, please verify that the directory exists and is empty.")
     elif chose=="u":
-        path=input("Please indicate the directory where CmdOS is installed : ")
+        path=input("Please indicate the directory where CmdOS is installed:")
         print("Checking directory...")
         if os.path.exists(path)==True and "CmdOS.py" in os.listdir(path):
             print("Deleting in progress...")
@@ -139,6 +160,11 @@ elif language=="en":
             for file in list_file:
                 print("Moving directory "+file+" from "+path+"/user/"+file+" to "+path+"/save")
                 shutil.move(path+"/user/"+file,path+"/save")
+            versiontxt=open(path+"/cmdversion.txt","r")
+            version=versiontxt.readlines()
+            version=version[0]
+            versiontxt.close()
+            print("The current version is "+version)
             print("Uninstalling the old version...")
             list_file=os.listdir(path)
             for file in list_file:
@@ -151,6 +177,13 @@ elif language=="en":
                         shutil.rmtree(path+"/"+file)
                 else:
                     next
+            versiontxt=req.get("https://biotech-online.pagesperso-orange.fr/Mathias/cmdversion",allow_redirects=True)
+            open("cmdversion.txt","wb").write(versiontxt.content)
+            vertxt=open("cmdversion.txt","r")
+            verlist=vertxt.readlines()
+            vertxt.close()
+            print("The latest version is "+verlist[0])
+            os.remove("cmdversion.txt")
             print("Installing the latest version...")
             print("Recovering files...")
             filename, headers = urllib.request.urlretrieve("https://github.com/lolo859/CmdOS/archive/refs/heads/main.zip", filename=path+"/CmdOS.zip")
@@ -171,6 +204,6 @@ elif language=="en":
             print("Finishing...")
             os.remove(path+"/user/readme.txt")
             shutil.rmtree(path+"/save")
-            print("CmdOS has been successfully updated in the directory "+path)
+            print("CmdOS has been successfully updated in the directory "+path+" to the version "+verlist[0])
         else:
             print("An error has occurred, please check that the directory exists and that CmdOS is installed there.")
