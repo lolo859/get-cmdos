@@ -114,7 +114,7 @@ elif language=="en":
         else:
             print("An error has occurred, please verify that the directory exists and is empty.")
     elif chose=="u":
-        path=input("Please indicate the directory where CmdOS is installed:")
+        path=input("Please indicate the directory where CmdOS is installed : ")
         print("Checking directory...")
         if os.path.exists(path)==True and "CmdOS.py" in os.listdir(path):
             print("Deleting in progress...")
