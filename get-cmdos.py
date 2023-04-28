@@ -28,6 +28,7 @@ if language=="fr":
             os.rmdir(path+"/CmdOS-main")
             print("Finalisation...")
             os.remove(path+"/user/readme.txt")
+            os.remove(path+"/logs/readme.txt")
             versiontxt=open(path+"/cmdversion.txt","r")
             version=versiontxt.readlines()
             version=version[0]
@@ -104,6 +105,11 @@ if language=="fr":
                 shutil.move(path+"/save/"+file,path+"/user")
             print("Finalisation...")
             os.remove(path+"/user/readme.txt")
+            try:
+                if "readme.txt" in os.listdir(path+"/logs"):
+                    os.remove(path+"/logs/readme.txt")
+            except:
+                pass
             shutil.rmtree(path+"/save")
             print("CmdOS a bien été mis à jour dans le répertoire "+path+" vers la version "+verlist[0])
         else:
@@ -127,6 +133,7 @@ elif language=="en":
             os.rmdir(path+"/CmdOS-main")
             print("Finishing...")
             os.remove(path+"/user/readme.txt")
+            os.remove(path+"/logs/readme.txt")
             versiontxt=open(path+"/cmdversion.txt","r")
             version=versiontxt.readlines()
             version=version[0]
@@ -203,6 +210,11 @@ elif language=="en":
                 shutil.move(path+"/save/"+file,path+"/user")
             print("Finishing...")
             os.remove(path+"/user/readme.txt")
+            try:
+                if "readme.txt" in os.listdir(path+"/logs"):
+                    os.remove(path+"/logs/readme.txt")
+            except:
+                pass
             shutil.rmtree(path+"/save")
             print("CmdOS has been successfully updated in the directory "+path+" to the version "+verlist[0])
         else:
