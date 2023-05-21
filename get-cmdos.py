@@ -79,7 +79,7 @@ if language=="fr":
                         shutil.rmtree(path+"/"+file)
                 else:
                     next
-            versiontxt=req.get("https://biotech-online.pagesperso-orange.fr/Mathias/cmdversion",allow_redirects=True)
+            versiontxt=req.get("https://cmdos.alwaysdata.net/cmdversion.txt",allow_redirects=True)
             open("cmdversion.txt","wb").write(versiontxt.content)
             vertxt=open("cmdversion.txt","r")
             verlist=vertxt.readlines()
@@ -88,7 +88,7 @@ if language=="fr":
             os.remove("cmdversion.txt")
             print("Installation de la nouvelle version...")
             print("Récupération des fichiers...")
-            filename, headers = urllib.request.urlretrieve("https://github.com/lolo859/CmdOS/archive/refs/heads/main.zip", filename=path+"/CmdOS.zip")
+            filename, headers = urllib.request.urlretrieve("https://cmdos.alwaysdata.net/cmdversion.txt", filename=path+"/CmdOS.zip")
             print("Dépaquetage en cours...")
             with zipfile.ZipFile(path+"/CmdOS.zip","r") as zipref:
                 zipref.extractall(path)
