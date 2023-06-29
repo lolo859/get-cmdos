@@ -29,6 +29,7 @@ if language=="fr":
             print("Finalisation...")
             os.remove(path+"/user/readme.txt")
             os.remove(path+"/logs/readme.txt")
+            os.remove(path+"/module/readme.txt")
             versiontxt=open(path+"/cmdversion.txt","r")
             version=versiontxt.readlines()
             version=version[0]
@@ -110,6 +111,17 @@ if language=="fr":
                     os.remove(path+"/logs/readme.txt")
             except:
                 pass
+            try:
+                if "readme.txt" in os.listdir(path+"/module"):
+                    os.remove(path+"/module/readme.txt")
+            except:
+                pass
+            try:
+                for i in os.listdir(path+"/user"):
+                    if "save_module" in os.listdir(path+"/user/"+i):
+                        shutil.rmtree(path+"/user/"+i+"/save_module")
+            except:
+                pass
             shutil.rmtree(path+"/save")
             print("CmdOS a bien été mis à jour dans le répertoire "+path+" vers la version "+verlist[0])
         else:
@@ -134,6 +146,7 @@ elif language=="en":
             print("Finishing...")
             os.remove(path+"/user/readme.txt")
             os.remove(path+"/logs/readme.txt")
+            os.remove(path+"/module/readme.txt")
             versiontxt=open(path+"/cmdversion.txt","r")
             version=versiontxt.readlines()
             version=version[0]
@@ -213,6 +226,17 @@ elif language=="en":
             try:
                 if "readme.txt" in os.listdir(path+"/logs"):
                     os.remove(path+"/logs/readme.txt")
+            except:
+                pass
+            try:
+                if "readme.txt" in os.listdir(path+"/module"):
+                    os.remove(path+"/module/readme.txt")
+            except:
+                pass
+            try:
+                for i in os.listdir(path+"/user"):
+                    if "save_module" in os.listdir(path+"/user/"+i):
+                        shutil.rmtree(path+"/user/"+i+"/save_module")
             except:
                 pass
             shutil.rmtree(path+"/save")
