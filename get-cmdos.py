@@ -29,6 +29,7 @@ if language=="fr":
             print("Finalisation...")
             os.remove(path+"/user/readme.txt")
             os.remove(path+"/logs/readme.txt")
+            os.remove(path+"/temp/readme.txt")
             os.remove(path+"/module/readme.txt")
             versiontxt=open(path+"/cmdversion.txt","r")
             version=versiontxt.readlines()
@@ -107,6 +108,11 @@ if language=="fr":
             print("Finalisation...")
             os.remove(path+"/user/readme.txt")
             try:
+                if "readme.txt" in os.listdir(path+"/temp"):
+                    os.remove(path+"/temp/readme.txt")
+            except:
+                pass
+            try:
                 if "readme.txt" in os.listdir(path+"/logs"):
                     os.remove(path+"/logs/readme.txt")
             except:
@@ -146,6 +152,7 @@ elif language=="en":
             print("Finishing...")
             os.remove(path+"/user/readme.txt")
             os.remove(path+"/logs/readme.txt")
+            os.remove(path+"/temp/readme.txt")
             os.remove(path+"/module/readme.txt")
             versiontxt=open(path+"/cmdversion.txt","r")
             version=versiontxt.readlines()
@@ -223,6 +230,11 @@ elif language=="en":
                 shutil.move(path+"/save/"+file,path+"/user")
             print("Finishing...")
             os.remove(path+"/user/readme.txt")
+            try:
+                if "readme.txt" in os.listdir(path+"/temp"):
+                    os.remove(path+"/temp/readme.txt")
+            except:
+                pass
             try:
                 if "readme.txt" in os.listdir(path+"/logs"):
                     os.remove(path+"/logs/readme.txt")
